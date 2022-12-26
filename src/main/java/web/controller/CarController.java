@@ -20,12 +20,10 @@ public class CarController {
 
     @GetMapping(value = "")
     public String carsWithCount(@RequestParam(value = "count", required = false, defaultValue = "5") int count, ModelMap model) {
-        if (count <= 0) {
-            model.addAttribute("messages", "Недопустимое значение count");
-        } else if (count > 0 && count < 5) {
+        if (count > 0 && count < 5) {
             List<Car> messages = carServiceInt.getListOfCars().subList(0, count);
             model.addAttribute("messages", messages);
-        } else {
+        } else if( count >= 5 ) {
             List<Car> messages = carServiceInt.getListOfCars();
             model.addAttribute("messages", messages);
         }
